@@ -1,0 +1,40 @@
+create table personas (
+	id_persona int not null,
+	edad_persona int,
+	nombre_persona varchar (50),
+	apellido_persona varchar (50),
+	primary key (id_persona)
+);
+
+create table tramites (
+	id_tramite int not null,
+	nombre_tramite varchar (50),
+	fecha_tramite date,
+	costo_tramite
+	primary	key (id_tramite)
+);
+
+create table sacramentos (
+	id_sacramento int not null,
+	nombre_sacramento varchar (50),
+	primary key (id_sacramento)
+);
+
+create table accion_eclesiastica (
+	id_personarecibe int not null,
+	fecha_realizada date,
+	acta varchar (25)
+);
+
+
+create table requisitos (
+	id_requisito int not null,
+	nombre_requisito varchar (30),
+	iglesia_recibsacramento varchar (35)
+);
+
+
+create table acta_accion_ecle (
+	id_doc int not null,
+	nombre_doc varchar (25)
+);
