@@ -1,0 +1,119 @@
+-- Table: public.accion_eclesiastica
+
+-- DROP TABLE public.accion_eclesiastica;
+
+CREATE TABLE public.accion_eclesiastica
+(
+    id_personarecibe integer NOT NULL,
+    fecha_realizada date,
+    CONSTRAINT accion_eclesiastica_pkey PRIMARY KEY (id_personarecibe)
+)
+WITH (
+    OIDS = FALSE
+)
+TABLESPACE pg_default;
+
+ALTER TABLE public.accion_eclesiastica
+    OWNER to postgres;
+    
+    -- Table: public.participantes
+
+-- DROP TABLE public.participantes;
+
+CREATE TABLE public.participantes
+(
+    id_participante integer NOT NULL,
+    nombreapelli_participante character varying(100) COLLATE pg_catalog."default",
+    edad_persona integer,
+    CONSTRAINT participantes_pkey PRIMARY KEY (id_participante)
+)
+WITH (
+    OIDS = FALSE
+)
+TABLESPACE pg_default;
+
+ALTER TABLE public.participantes
+    OWNER to postgres;
+    
+    
+    
+-- Table: public.personas
+
+-- DROP TABLE public.personas;
+
+CREATE TABLE public.personas
+(
+    id_persona integer NOT NULL,
+    edad_persona integer,
+    nombreapellido_persona character varying(90) COLLATE pg_catalog."default",
+    CONSTRAINT personas_pkey PRIMARY KEY (id_persona)
+)
+WITH (
+    OIDS = FALSE
+)
+TABLESPACE pg_default;
+
+ALTER TABLE public.personas
+    OWNER to postgres;
+    
+    
+-- Table: public.requisitos
+
+-- DROP TABLE public.requisitos;
+
+CREATE TABLE public.requisitos
+(
+    id_requisito integer NOT NULL,
+    nombre_requisito character varying(150) COLLATE pg_catalog."default",
+    iglesia_recibsacramento character varying(150) COLLATE pg_catalog."default",
+    CONSTRAINT requisitos_pkey PRIMARY KEY (id_requisito)
+)
+WITH (
+    OIDS = FALSE
+)
+TABLESPACE pg_default;
+
+ALTER TABLE public.requisitos
+    OWNER to postgres;
+    
+    
+    
+-- Table: public.sacramentos
+
+-- DROP TABLE public.sacramentos;
+
+CREATE TABLE public.sacramentos
+(
+    id_sacramento integer NOT NULL,
+    nombre_sacramento character varying(50) COLLATE pg_catalog."default",
+    CONSTRAINT sacramentos_pkey PRIMARY KEY (id_sacramento)
+)
+WITH (
+    OIDS = FALSE
+)
+TABLESPACE pg_default;
+
+ALTER TABLE public.sacramentos
+    OWNER to postgres;
+    
+    
+ -- Table: public.tramites
+
+-- DROP TABLE public.tramites;
+
+CREATE TABLE public.tramites
+(
+    id_tramite integer NOT NULL,
+    nombre_tramite character varying(50) COLLATE pg_catalog."default",
+    fecha_tramite date,
+    costo_tramite character varying COLLATE pg_catalog."default",
+    num_veces integer,
+    CONSTRAINT tramites_pkey PRIMARY KEY (id_tramite)
+)
+WITH (
+    OIDS = FALSE
+)
+TABLESPACE pg_default;
+
+ALTER TABLE public.tramites
+    OWNER to postgres;
