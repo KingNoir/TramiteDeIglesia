@@ -91,5 +91,4 @@ inner join sacramentos
 on personas.id_persona = sacramentos.id_sacramento
 order by edad_persona asc
 
---Consulta #4--
 
