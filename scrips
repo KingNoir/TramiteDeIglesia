@@ -1,12 +1,25 @@
+-- Database: Tramites De Iglesia
+
+-- DROP DATABASE "Tramites De Iglesia";
+
+CREATE DATABASE "Tramites De Iglesia"
+    WITH 
+    OWNER = postgres
+    ENCODING = 'UTF8'
+    LC_COLLATE = 'Spanish_Latin America.1252'
+    LC_CTYPE = 'Spanish_Latin America.1252'
+    TABLESPACE = pg_default
+    CONNECTION LIMIT = -1;
+	
+	
 create table personas (
 	id_persona int not null,
 	edad_persona int,
-	nombre_persona varchar (50),
-	apellido_persona varchar (50),
+	nombreapellido_persona_persona varchar (50),
+	 varchar (50),
 	primary key (id_persona)
 );
 
-select * from acta_accion_ecle
 
 create table tramites (
 	id_tramite int not null,
@@ -57,3 +70,26 @@ insert into sacerdote values ('1','José Félix','5');
 insert into sacerdote values ('2','Andrés Pico','12');
 insert into sacerdote values ('3','Pablo Palacio','3');
 insert into sacerdote values ('4','Álava Zambrano','22');
+
+
+--consultas--
+ --Consulta #1
+select nombre_sacerdote, ceremonia_sac from sacerdote
+order by ceremonia_sac desc
+limit (1)
+
+--Consulta #2--
+select nombre_tramite, num_veces from tramites
+where num_veces > '30'
+
+--Consulta #3--
+select * from personas
+select * from sacramentos 
+
+select id_persona, nombreapellido_persona, nombre_sacramento from personas
+inner join sacramentos 
+on personas.id_persona = sacramentos.id_sacramento
+order by edad_persona asc
+
+--Consulta #4--
+
