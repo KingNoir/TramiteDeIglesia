@@ -6,6 +6,8 @@ create table personas (
 	primary key (id_persona)
 );
 
+select * from acta_accion_ecle
+
 create table tramites (
 	id_tramite int not null,
 	nombre_tramite varchar (50),
@@ -33,8 +35,25 @@ create table requisitos (
 	iglesia_recibsacramento varchar (35)
 );
 
-
 create table acta_accion_ecle (
 	id_doc int not null,
-	nombre_doc varchar (25)
+	nombre_doc varchar (75),
+	PRIMARY KEY (id_doc)
 );
+
+insert into acta_accion_ecle values ('1','Certificado de matrimonio');
+insert into acta_accion_ecle values ('2','Certificado Comunion');
+insert into acta_accion_ecle values ('3','Certificado Confirmación');
+insert into acta_accion_ecle values ('4','Certificado De Bautizo');
+
+create table sacerdote (
+	id_sacerdote int not null,
+	nombre_sacerdote varchar (200),
+	ceremonia_sac int,
+	primary key (id_sacerdote)
+);
+
+insert into sacerdote values ('1','José Félix','5');
+insert into sacerdote values ('2','Andrés Pico','12');
+insert into sacerdote values ('3','Pablo Palacio','3');
+insert into sacerdote values ('4','Álava Zambrano','22');
