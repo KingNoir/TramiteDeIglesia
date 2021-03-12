@@ -1,0 +1,90 @@
+--Crear un trigger que permita llevar un registro de los cambios cuando se realice un update en la tabla de tramites--
+
+
+--Añadimos una tabla nueva donde iran los datos antiguos cuando se realice un update mediante el uso de un trigger--
+create table auditoria (
+	id_tram int not null,
+	nmbr_tramite varchar(50),
+	fecha_trami date,
+	costo_tramit varchar(15),
+	num_veces int
+);
+
+
+--Creamos la fucion donde especificaremos que parametros vamos a tomar para que se guarden dentro de la nueva tabla--
+create FUNCTION ichi_try() returns trigger
+as
+$$
+begin
+insert into "auditoria" values (old.id_tramite, old.nombre_tramite, old.fecha_tramite, old.costo_tramite, old.num_veces);
+return new;
+end
+$$
+LANGUAGE plpgsql;
+
+
+--Creamos el trigger que al momento de realizar un update en la tabla tramites, esta tomara los valores previamente indicados para ser 
+--trasladados a la tabla de auditoria
+
+create TRIGGER tr_update before update on tramites
+for each row 
+execute procedure ichi_try();
+
+
+update tramites set
+nombre_tramite = 'Misa De Difuncion',
+fecha_tramite = '2020-04-18',
+costo_tramite = '$40'
+where nombre_tramite = 'Misa De Difuncion' and costo_tramite = '$20'
+---------------------------------------
+
+select * from auditoria
+
+select * from tramites;
+
+select * from sacramentos;
+
+
+--Creamos un cursos que nos permite buscar en la tabla de sacramentos los sacramnentos que se encuntra alli,
+--ordenandolos de manera alfabetica y utilizando un while para que se repita asi como el found que es una clausula la cual permite
+--la ejecucion constante del while hasta que ya no se encuentre nada para ingresar en el registro.
+
+do $$
+declare
+		registro Record;
+		cur_nii Cursor for select * from "sacramentos" order by  nombre_sacramento; 
+begin
+	open cur_nii; 
+	fetch cur_nii into registro;
+	while (found) loop
+	raise notice 'Sacramento: %',registro.nombre_sacramento;
+	fetch cur_nii into registro;
+	end loop;
+end $$
+LANGUAGE plpgsql;
+
+
+insert into participantes values ('1','Emilia Macias','25');
+insert into participantes values ('3','Maria Palacios','33');
+insert into participantes values ('4','Jorge Lopez','54');
+insert into participantes values ('6','Fernando Mero','31');
+insert into participantes values ('5','Amy Fernandez','41');
+insert into participantes values ('7','Nicko Cedeño','38');
+
+
+--Creamos una funcion que nos permita añadir a mas participantes dentro del registro.
+
+create or replace FUNCTION aniadir_personas() returns void
+as
+$$
+Insert into participantes values ('10','Jose Palacio','24');
+Insert into participantes values ('11','Viviana Loor','23');
+$$
+LANGUAGE SQL
+
+Select aniadir_personas()
+
+
+select * from participantes;
+
+select * from participantes order by id_participante asc;
